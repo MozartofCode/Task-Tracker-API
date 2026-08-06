@@ -27,10 +27,10 @@ bin/
 .DS_Store
 
 ### Application secrets ###
-application.properties
-application-*.properties
-application.yml
-application-*.yml
+src/main/resources/application.properties
+src/main/resources/application-*.properties
+src/main/resources/application.yml
+src/main/resources/application-*.yml
 .env
 .env.*
 *.pem
