@@ -7,9 +7,11 @@ import java.util.List;
 public class TaskService {
 
     private final TaskRepository taskRepository;
+    private final NotificationService notificationService;
 
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, NotificationService notificationService) {
         this.taskRepository = taskRepository;
+        this.notificationService = notificationService;
     }
 
     public List<Task> getAllTasks() {
@@ -18,7 +20,9 @@ public class TaskService {
 
     public Task createTask(Task task) {
         task.setStatus("TODO");
-        return taskRepository.save(task);
+        Task saved = taskRepository.save(task);
+        notificationService.notifyTaskCreated(saved);
+        return saved;
     }
 
     public Task updateTask(Long id, Task updated) {
