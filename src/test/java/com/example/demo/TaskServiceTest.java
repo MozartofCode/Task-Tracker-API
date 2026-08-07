@@ -17,6 +17,9 @@ class TaskServiceTest {
     @Mock
     private TaskRepository taskRepository;
 
+    @Mock
+    private NotificationService notificationService;
+
     @InjectMocks
     private TaskService taskService;
 
@@ -27,6 +30,7 @@ class TaskServiceTest {
         task.setDescription("Test description");
 
         when(taskRepository.save(any(Task.class))).thenReturn(task);
+        doNothing().when(notificationService).notifyTaskCreated(any(Task.class));
 
         Task result = taskService.createTask(task);
 
